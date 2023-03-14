@@ -1,0 +1,115 @@
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  td.sumar {
+    background-color: #e9eff9;
+  }
+  td#dc {
+    background-color: yellow;
+    font-weight: bold;
+  }
+  @media only screen and (max-width: 600px) {
+    th, td {
+      display: block;
+      width: 100%;
+    }
+    th {
+      text-align: left;
+    }
+  }
+
+caption {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #4285f4;
+    padding: 10px;
+}
+  
+tr:nth-child(even){background-color: #f2f2f2}
+#calcular {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 12px 24px; /* Tamaño del botón */
+    border: none; /* Borde del botón */
+    border-radius: 4px; /* Redondear las esquinas del botón */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima del botón */
+    font-size: 16px; /* Tamaño del texto */
+  }
+  
+  #calcular:hover {
+    background-color: #3e8e41; /* Cambiar el color de fondo al pasar el cursor */
+  }
+  input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  input[type="number"]:focus {
+    border-color: dodgerblue;
+    outline: none;
+  }
+  
+  button {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: deepskyblue;
+  }
+/* Estilos para inputs */
+input[type="number"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 16px;
+  }
+  
+  /* Estilos para labels */
+  label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 2em;
+    text-align: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+  }
+  .section {
+    display: inline-block;
+    margin-right: 20px; /* Espacio entre secciones */
+    vertical-align: middle; /* Alinear verticalmente los elementos */
+  }
+  
+  .section label {
+    display: block; /* Alinear el texto a la izquierda */
+    font-weight: bold;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+  }
+  
+        
