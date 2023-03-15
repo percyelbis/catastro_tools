@@ -48,9 +48,9 @@
       <label for="rows">Ingrese Unidades/Edificas:</label>
       <input type="number" id="rows" name="rows">
       <button id="calcular" onclick="createTable()">Crear tabla</button>
-      <label for="area">Área Terreno:</label>
+      <label for="area">Área Terreno/Edifica:</label>
       <input type="number" id="area" name="area" value="0">
-      <label for="area_comun">Área Comun:</label>
+      <label for="area_comun">Área Comun Construida:</label>
       <input type="number" id="area_comun" name="area_comun" value="0">
       <table id="table">
           <thead>
@@ -65,5 +65,21 @@
           <tbody>
           </tbody>
       </table>
+      <br>
+      <center><h1 id="title">Buscar Multplicador  - Instalaciones Especiales </h1></center>
+      <label for="areap">Área:</label>
+      <input type="number" id="areap"><br>
+      <label for="anchop">Ancho:</label>
+      <input type="number" id="anchop"><br>
+      <label for="largop">Largo:</label>
+      <input type="number" id="largop">
+      
+
+      
+      <button onclick="calcularp()">Buscar Valores</button>
+      
+      <table id="tablap"></table>
+      
+
 </body>
 </html>

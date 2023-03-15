@@ -124,7 +124,58 @@ function createTable() {
       tbody.appendChild(row);
     }
 }
-  
+
+
+// instalaciones
+
+function calcularp() {
+  let areaInput = document.getElementById("areap");
+  let areap = parseFloat(areaInput.value);
+  let largo = parseFloat(document.getElementById("largop").value);
+  let ancho = parseFloat(document.getElementById("anchop").value);
+
+  let table = document.getElementById("tablap");
+  table.innerHTML = "";
+
+  let headerRow = table.insertRow(0);
+  headerRow.insertCell(0).innerHTML = "A";
+  headerRow.insertCell(1).innerHTML = "B";
+  headerRow.insertCell(2).innerHTML = "A * B";
+
+  for (let n = ancho; n < largo; n++) {
+    let A = Math.random() * (largo - ancho) + ancho;
+    let B = areap / A;
+    let AB = A * B;
+    let row = table.insertRow(-1);
+    row.insertCell(0).innerHTML = A.toFixed(2);
+    row.insertCell(1).innerHTML = B.toFixed(2);
+    row.insertCell(2).innerHTML = (row.cells[0].innerHTML * row.cells[1].innerHTML).toFixed(2);
+
+    if ( (row.cells[0].innerHTML * row.cells[1].innerHTML).toFixed(2) == areap) {
+
+
+      row.style.backgroundColor = "yellow";
+
+    
+
+    }
+  }
+  for (let i = table.rows.length - 1; i > 0; i--) { // Comenzar desde el final para no afectar el índice
+    let row = table.rows[i];
+    if (row.style.backgroundColor !== "yellow") {
+      table.deleteRow(i);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
