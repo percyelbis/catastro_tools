@@ -79,6 +79,40 @@
       <button onclick="calcularp()">Buscar Valores</button>
       
       <table id="tablap"></table>
+    
+      <center><h1 id="title">Tolerancias Catastrales-Registrales</h1></center>
+      <div class="form-container">
+        <form>
+          <center><p id="urbano">Naturaleza Urbana</p></center>
+          <div class="form-field">
+            <label for="area_urbana_m2">Área Registro (m²):</label>
+            <input type="number" id="area_urbana_m2" min="0">
+          </div>
+          <div class="form-field">
+            <label for="area_catastro_m2">Área Catastro (m²):</label>
+            <input type="number" id="area_catastro_m2" min="0">
+          </div>
+          <center><p id="urbano">Naturaleza Rural</p></center>
+          <div class="form-field">
+            <label for="area_rural_ha">Área Registro (ha):</label>
+            <input type="number" id="area_rural_ha" min="0">
+          </div>
+          <div class="form-field">
+          <div class="form-field">
+            <label for="area_catastro_ha">Área Catastro (ha):</label>
+            <input type="number" id="area_catastro_ha" min="0">
+          </div>
+            <div class="form-field">
+            <input type="button" id="calcular_btn" value="Calcular" onclick="calcularTolerancia()">
+          </div>
+        </form>
+        <div class="resultado-container">
+          <p id="resultado"></p>
+        </div>
+        <div class="resultado-container">
+          <p id="resultado1"></p>
+        </div>
+      </div>
       
 
 </body>
