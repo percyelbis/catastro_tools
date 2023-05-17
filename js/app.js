@@ -169,6 +169,48 @@ function calcularp() {
 }
 
 
+// tolerancias catastrales
+function calcularTolerancia() {
+  // Obtenemos los valores de entrada
+  var area_urbana_m2 = Number(document.getElementById("area_urbana_m2").value);
+  var area_catastro_m2 = Number(document.getElementById("area_catastro_m2").value);
+
+  var area_rural_ha = Number(document.getElementById("area_rural_ha").value);
+  var area_catastro_ha = Number(document.getElementById("area_catastro_ha").value);
+  // Calculamos la tolerancia catastral para el área urbana
+  if (area_urbana_m2<200) {
+    var porcentaje_urbana = 0.025;
+  } else if (200 <= area_urbana_m2 && area_urbana_m2 < 1000) {
+    var porcentaje_urbana = 0.02;
+  } else {
+    var porcentaje_urbana = 0.01;
+  };
+  var tolerancia_urbana = area_urbana_m2 * porcentaje_urbana;
+  var rango_urbana = [tolerancia_urbana, porcentaje_urbana*100];
+  // Calculamos la tolerancia catastral para el área rural
+  if (area_rural_ha < 1) {
+    var porcentaje_rural = 0.075;
+  } else if (1 <= area_rural_ha && area_rural_ha < 5) {
+    var porcentaje_rural = 0.063;
+  } else {
+    var porcentaje_rural = 0.03;
+  }
+  var tolerancia_rural = area_rural_ha * porcentaje_rural;
+  var rango_rural = [tolerancia_rural, porcentaje_rural*100 ];
+
+  
+  // Mostramos los resultados
+  var resultado = "-------Tolerancia (%) - Urbana-------"+"<br>" + 
+  "Norma: " + rango_urbana[1].toFixed(4) + "% --> " + rango_urbana[0].toFixed(4) + " m²" + "<br>" +
+  "Calculada: " + ((Math.abs(area_urbana_m2 - area_catastro_m2 )*100)/area_urbana_m2).toFixed(4) + "% --> " + Math.abs(area_urbana_m2 - area_catastro_m2 ).toFixed(4) + " m²";
+  var resultado1 = "-------Tolerancia (%) - Rural-------"+"<br>" +
+  " Norma: " + rango_rural[1].toFixed(4) + "% --> " + rango_rural[0].toFixed(4) + " ha" + "<br>" +
+  "Calculada: " + ((Math.abs(area_rural_ha - area_catastro_ha )*100)/area_rural_ha).toFixed(4) + "% --> " + Math.abs(area_rural_ha - area_catastro_ha ).toFixed(4) + " ha";
+
+  document.getElementById("resultado").innerHTML = resultado;
+  document.getElementById("resultado1").innerHTML = resultado1;
+}
+
 
 
 
