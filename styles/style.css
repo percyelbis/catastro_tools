@@ -111,5 +111,80 @@ input[type="number"] {
     font-weight: bold;
     margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
   }
+
+
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .form-field {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="number"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  #calcular_btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #calcular_btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .resultado-container {
+    margin-top: 20px;
+  }
+  
+  #resultado {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.5em;
+  }
+  
+  #resultado1 {
+    background-color: #bedbb1;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.5em;
+  }
+  #urbano {
+    font-size: 13px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px #09ec36;
+  }
+
+  .red {
+    color: red;
+  }
+  .blue {
+    color: blue;
+  }
   
         
