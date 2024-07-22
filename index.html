@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="styles/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/app.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7711031913680213"
-     crossorigin="anonymous"></script>
+    <meta name="description" content="CatastroTools: Herramientas para el análisis catastral.">
+    <meta name="keywords" content="catastro, análisis catastral, herramientas catastrales, cofopri, sncp">
+    <meta name="author" content="Percy Quasar">
 </head>
 <body>
     <table>
@@ -68,18 +69,14 @@
           </tbody>
       </table>
       <br>
-      <center><h1 id="title">Buscar Multplicador  - Instalaciones Especiales </h1></center>
+      <center><h1 id="title">Buscar Multplicador - Instalaciones Especiales</h1></center>
       <label for="areap">Área:</label>
       <input type="number" id="areap"><br>
       <label for="anchop">Ancho:</label>
       <input type="number" id="anchop"><br>
       <label for="largop">Largo:</label>
       <input type="number" id="largop">
-      
-
-      
       <button onclick="calcularp()">Buscar Valores</button>
-      
       <table id="tablap"></table>
     
       <center><h1 id="title">Tolerancias Catastrales-Registrales</h1></center>
@@ -100,11 +97,10 @@
             <input type="number" id="area_rural_ha" min="0">
           </div>
           <div class="form-field">
-          <div class="form-field">
             <label for="area_catastro_ha">Área Catastro (ha):</label>
             <input type="number" id="area_catastro_ha" min="0">
           </div>
-            <div class="form-field">
+          <div class="form-field">
             <input type="button" id="calcular_btn" value="Calcular" onclick="calcularTolerancia()">
           </div>
         </form>
@@ -116,6 +112,14 @@
         </div>
       </div>
       
-
+      <center>
+        <h1>Cómo usar???</h1>
+        <a href="https://www.youtube.com/watch?v=4J2hYHl56E0" target="_blank" id="youtube-tutorial">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" width="50">
+        </a>
+      </center>
+      <footer>
+        <p>&copy; 2024 CatastroTools. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
