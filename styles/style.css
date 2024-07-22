@@ -186,5 +186,59 @@ input[type="number"] {
   .blue {
     color: blue;
   }
+  .whatsapp-button {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the element */
+    left: 50%;
+    margin-left: -80px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.whatsapp-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+.youtube-button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the element */
+  left: 50%;
+  margin-left: -100px; /* Center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.youtube-button:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
   
         
