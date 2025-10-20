@@ -19,6 +19,20 @@ function sumarCeldas() {
 
 
 // prorrateo
+function evaluarExpresion(expresion) {
+    try {
+        // Remover espacios y validar que solo contenga números, operadores y paréntesis
+        expresion = expresion.replace(/\s/g, '');
+        if (!/^[0-9+\-*/().]+$/.test(expresion)) {
+            return NaN;
+        }
+        // Evaluar la expresión de forma segura
+        return Function('"use strict"; return (' + expresion + ')')();
+    } catch (e) {
+        return NaN;
+    }
+}
+
 function calculateD() {
     var table = document.getElementById("table");
     var tbody = table.getElementsByTagName("tbody")[0];
@@ -26,29 +40,51 @@ function calculateD() {
     var area = parseFloat(document.getElementById("area").value);
     var area_comun = parseFloat(document.getElementById("area_comun").value);
     
-
-
-
     var suma_area_ocupada = 0;
   
     // Iterar sobre todas las filas y sumar los valores de área ocupada
     for (var i = 0; i < rows.length; i++) {
-      var area_ocupada = parseFloat(rows[i].getElementsByTagName("input")[0].value);
-      suma_area_ocupada += area_ocupada;
+      var inputValue = rows[i].getElementsByTagName("input")[0].value;
+      var area_ocupada = evaluarExpresion(inputValue);
+      if (!isNaN(area_ocupada)) {
+        suma_area_ocupada += area_ocupada;
+      }
     }
   
+    // Actualizar total de área ocupada
+    document.getElementById("total_ocupada").textContent = suma_area_ocupada.toFixed(2);
+    
+    var total_atc = 0;
+    var total_acc = 0;
+    
     // Iterar sobre todas las filas y calcular el porcentaje de área ocupada y el ATC
     for (var i = 0; i < rows.length; i++) {
-      var area_ocupada = parseFloat(rows[i].getElementsByTagName("input")[0].value);
+      var inputValue = rows[i].getElementsByTagName("input")[0].value;
+      var area_ocupada = evaluarExpresion(inputValue);
+      
+      if (isNaN(area_ocupada) || suma_area_ocupada === 0) {
+        rows[i].getElementsByTagName("td")[2].textContent = "0.00%";
+        rows[i].getElementsByTagName("td")[3].textContent = "0.00";
+        rows[i].getElementsByTagName("td")[4].textContent = "0.00";
+        continue;
+      }
+      
       var porcentaje = (area_ocupada / suma_area_ocupada) * 100;
       var atc = (porcentaje * area)/100;
       var acc = (porcentaje * area_comun)/100;
+      
+      total_atc += atc;
+      total_acc += acc;
   
-      // Actualizar el texto de las columnas % y ATC
+      // Actualizar el texto de las columnas %, ATC y ACC
       rows[i].getElementsByTagName("td")[2].textContent = porcentaje.toFixed(2) + "%";
       rows[i].getElementsByTagName("td")[3].textContent = atc.toFixed(2);
       rows[i].getElementsByTagName("td")[4].textContent = acc.toFixed(2);
     }
+    
+    // Actualizar totales
+    document.getElementById("total_atc").textContent = total_atc.toFixed(2);
+    document.getElementById("total_acc").textContent = total_acc.toFixed(2);
   }
   
 document.addEventListener("DOMContentLoaded", function() {
@@ -68,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   
-  // Función para crear la tabla
+// Función para crear la tabla
 function createTable() {
     // Obtener el número de unidades, área_terreno, area_comun
     var rows = parseInt(document.getElementById("rows").value);
@@ -96,8 +132,9 @@ function createTable() {
       // Agregar la columna area ocupada
       var bienesCell = document.createElement("td");
       var bienesInput = document.createElement("input");
-      bienesInput.setAttribute("type", "number");
+      bienesInput.setAttribute("type", "text");
       bienesInput.setAttribute("value", "0");
+      bienesInput.setAttribute("placeholder", "Ej: 2.35 + 5.23");
       bienesInput.addEventListener("input", function() {
         calculateD();
       });
@@ -106,23 +143,78 @@ function createTable() {
   
       // Agregar la columna %
       var porcentaje = document.createElement("td");
-      porcentaje.appendChild(document.createTextNode(""));
+      porcentaje.appendChild(document.createTextNode("0.00%"));
       row.appendChild(porcentaje);
   
       // Agregar la columna ATC
       var atc = document.createElement("td");
-      atc.appendChild(document.createTextNode(""));
+      atc.appendChild(document.createTextNode("0.00"));
       row.appendChild(atc);
   
-      tbody.appendChild(row);
-      // ACC
-
+      // Agregar la columna ACC
       var acc = document.createElement("td");
-      acc.appendChild(document.createTextNode(""));
+      acc.appendChild(document.createTextNode("0.00"));
       row.appendChild(acc);
 
       tbody.appendChild(row);
     }
+    calculateD();
+}
+
+// Función para exportar a Excel
+function exportarExcel() {
+    var table = document.getElementById("table");
+    
+    // Crear un nuevo workbook
+    var wb = XLSX.utils.book_new();
+    
+    // Obtener datos de la tabla
+    var data = [];
+    
+    // Agregar encabezados
+    data.push(['Unidades/Edificas', 'Area Ocupada', '%', 'ATC', 'ACC']);
+    
+    // Agregar datos del tbody
+    var tbody = table.getElementsByTagName("tbody")[0];
+    var rows = tbody.getElementsByTagName("tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        var inputValue = rows[i].getElementsByTagName("input")[0].value;
+        var valorCalculado = evaluarExpresion(inputValue);
+        
+        data.push([
+            cells[0].textContent,
+            valorCalculado.toFixed(2),
+            cells[2].textContent,
+            cells[3].textContent,
+            cells[4].textContent
+        ]);
+    }
+    
+    // Agregar fila de totales
+    data.push([
+        'TOTAL',
+        document.getElementById("total_ocupada").textContent,
+        '100%',
+        document.getElementById("total_atc").textContent,
+        document.getElementById("total_acc").textContent
+    ]);
+    
+    // Agregar información adicional
+    data.push([]);
+    data.push(['Área Terreno/Edifica:', document.getElementById("area").value]);
+    data.push(['Área Común Construida:', document.getElementById("area_comun").value]);
+    
+    // Convertir datos a worksheet
+    var ws = XLSX.utils.aoa_to_sheet(data);
+    
+    // Agregar worksheet al workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Prorrateo");
+    
+    // Generar archivo y descargarlo
+    var fecha = new Date().toISOString().split('T')[0];
+    XLSX.writeFile(wb, 'Prorrateo_' + fecha + '.xlsx');
 }
 
 
@@ -210,17 +302,3 @@ function calcularTolerancia() {
   document.getElementById("resultado").innerHTML = resultado;
   document.getElementById("resultado1").innerHTML = resultado1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
