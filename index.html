@@ -7,6 +7,7 @@
     <title>CatastroTools</title>
     <link rel="stylesheet" href="styles/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="js/app.js"></script>
     <meta name="description" content="CatastroTools: Herramientas para el análisis catastral.">
     <meta name="keywords" content="catastro, análisis catastral, herramientas catastrales, cofopri, sncp">
@@ -14,24 +15,24 @@
 </head>
 <body>
     <table>
-        <caption>CÓDIGO DE REFERENCIA CATASTRAL</caption>
-        <thead>
-          <tr>
-            <th>DPTO</th>
-            <th>PROV</th>
-            <th>DIST</th>
-            <th>SECTOR</th>
-            <th>MANZANA</th>
-            <th>LOTE</th>
-            <th>EDIFICA</th>
-            <th>ENTRADA</th>
-            <th>PISO</th>
-            <th>UNIDAD</th>
-            <th>DC</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="fila_datos">
+      <caption>CÓDIGO DE REFERENCIA CATASTRAL</caption>
+      <thead>
+        <tr>
+          <th>DPTO</th>
+          <th>PROV</th>
+          <th>DIST</th>
+          <th>SECTOR</th>
+          <th>MANZANA</th>
+          <th>LOTE</th>
+          <th>EDIFICA</th>
+          <th>ENTRADA</th>
+          <th>PISO</th>
+          <th>UNIDAD</th>
+          <th>DC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="fila_datos">
             <td contenteditable="true" class="sumar"></td>
             <td contenteditable="true" class="sumar"></td>
             <td contenteditable="true" class="sumar"></td>
@@ -55,6 +56,9 @@
       <input type="number" id="area" name="area" value="0">
       <label for="area_comun">Área Comun Construida:</label>
       <input type="number" id="area_comun" name="area_comun" value="0">
+      <button onclick="exportarExcel()" style="background-color: #217346; margin-left: 10px;">
+        📥 Descargar Excel
+      </button>
       <table id="table">
           <thead>
               <tr>
@@ -67,6 +71,15 @@
           </thead>
           <tbody>
           </tbody>
+          <tfoot>
+              <tr style="font-weight: bold; background-color: #d9ead3;">
+                  <td>TOTAL</td>
+                  <td id="total_ocupada">0.00</td>
+                  <td>100%</td>
+                  <td id="total_atc">0.00</td>
+                  <td id="total_acc">0.00</td>
+              </tr>
+          </tfoot>
       </table>
       <br>
       <center><h1 id="title">Buscar Multplicador - Instalaciones Especiales</h1></center>
